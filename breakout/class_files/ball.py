@@ -5,7 +5,7 @@ from math import *
 class Ball:
 
     def __init__(self, x, y):
-        self.speed = 10
+        self.speed = 12
         self.x = x
         self.y = y
         self.x_step = cos(pi / 2) * self.speed

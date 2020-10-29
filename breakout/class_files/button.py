@@ -36,8 +36,9 @@ class Button:
         if self.left < mouse_x < self.right and self.top < mouse_y < self.bottom:
             return True
 
-    # This is just a tool to define a buttons position
-    def get_mouse_pos(self):
+    # This is just a tool for creating a button and deciding it's position
+    @staticmethod
+    def get_mouse_pos():
         mouse_x, mouse_y = pygame.mouse.get_pos()
         if pygame.mouse.get_pressed()[0]:
             print(mouse_x, mouse_y)

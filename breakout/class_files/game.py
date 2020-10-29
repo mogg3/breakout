@@ -28,9 +28,9 @@ class Game:
         self.boxes = []
 
         self.first_run = True
+        self.loaded = False
         self.in_menu = True
         self.paused = False
-        self.loaded = False
         self.won = False
         self.gameover = False
 
@@ -63,7 +63,6 @@ class Game:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
                 quit()
 
         if new_game_btn.inside():
@@ -116,7 +115,6 @@ class Game:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
                 quit()
 
         if continue_btn.inside():
@@ -158,7 +156,6 @@ class Game:
                 with open("pickle_files/lives.txt", "wb") as lives_file:
                     pickle.dump(self.lives, lives_file)
                 self.fade("ingame")
-                pygame.quit()
                 quit()
 
         if quit_btn.inside():
@@ -166,14 +163,16 @@ class Game:
                 pygame.image.load(r'C:\Users\marcu\PycharmProjects\Breakout\breakout\images\paused_quit.png'),
                 (200, 100))
             if quit_btn.clicked():
-                pygame.quit()
+                self.fade("ingame")
+                pygame.display.update()
+                time.sleep(1)
                 quit()
 
         pygame.display.update()
 
     def win_screen(self):
         quit_btn = Button(151, 310, 121, 40)
-        playagain_btn = Button(345, 310, 316, 40)
+        play_again_btn = Button(345, 310, 316, 40)
         self.screen.blit(pygame.image.load(r'C:\Users\marcu\PycharmProjects\Breakout\breakout\images\win.png'),
                          (0, 0))
         self.paddle.draw_paddle(self.screen)
@@ -186,12 +185,12 @@ class Game:
                 pygame.quit()
                 quit()
 
-        if playagain_btn.inside():
+        if play_again_btn.inside():
             self.screen.blit(
                 pygame.image.load(r'C:\Users\marcu\PycharmProjects\Breakout\breakout\images\win_playagain.png'),
                 (0, 0))
             pygame.display.update()
-            if playagain_btn.clicked():
+            if play_again_btn.clicked():
                 self.won = False
                 self.restart_game()
 
@@ -209,8 +208,8 @@ class Game:
         pygame.display.update()
 
     def game_over_screen(self):
-        playagain_btn2 = Button(360, 278, 283, 34)
-        quit_btn2 = Button(159, 278, 106, 34)
+        play_again_btn = Button(360, 278, 283, 34)
+        quit_btn = Button(159, 278, 106, 34)
 
         self.screen.blit(
             pygame.image.load(r'C:\Users\marcu\PycharmProjects\Breakout\breakout\images\gameover.png'),
@@ -220,22 +219,25 @@ class Game:
                 pygame.quit()
                 quit()
 
-        if playagain_btn2.inside():
+        if play_again_btn.inside():
             self.screen.blit(
                 pygame.image.load(
                     r'C:\Users\marcu\PycharmProjects\Breakout\breakout\images\gameover_playagain.png'),
                 (0, 0))
             pygame.display.update()
-            if playagain_btn2.clicked():
+            if play_again_btn.clicked():
                 self.gameover = False
                 self.restart_game()
 
-        if quit_btn2.inside():
+        if quit_btn.inside():
             self.screen.blit(
                 pygame.image.load(r'C:\Users\marcu\PycharmProjects\Breakout\breakout\images\gameover_quit.png'),
                 (0, 0))
             pygame.display.update()
-            if quit_btn2.clicked():
+            if quit_btn.clicked():
+                self.fade("ingame")
+                pygame.display.update()
+                time.sleep(1)
                 quit()
 
         pygame.display.update()
@@ -255,17 +257,6 @@ class Game:
     def draw_boxes(self):
         for box in self.boxes:
             box.draw_box(self.screen)
-
-    def wall_bounce(self):
-        if not ball_radius <= self.ball.x <= BOARD_WIDTH - ball_radius:
-            self.ball.x_step *= -1
-        if not ball_radius <= self.ball.y:
-            self.ball.y_step *= -1
-        if not self.ball.y <= BOARD_HEIGHT - ball_radius:
-            self.ball.y_step *= -1
-            self.lives -= 1
-        if self.lives == 0:
-            self.gameover = True
 
     def box_collide(self, box):
         if self.ball.left >= box.right or box.left >= self.ball.right:
@@ -292,6 +283,17 @@ class Game:
                 if box.hits == box.required_hits:
                     self.boxes.remove(self.boxes[i])
                     self.score += 50
+
+    def wall_bounce(self):
+        if not ball_radius <= self.ball.x <= BOARD_WIDTH - ball_radius:
+            self.ball.x_step *= -1
+        if not ball_radius <= self.ball.y:
+            self.ball.y_step *= -1
+        if not self.ball.y <= BOARD_HEIGHT - ball_radius:
+            self.ball.y_step *= -1
+            self.lives -= 1
+        if self.lives == 0:
+            self.gameover = True
 
     def paddle_collide(self):
         ball_mask = self.ball.get_mask()
