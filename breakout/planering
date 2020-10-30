@@ -3,10 +3,11 @@
 Ide: Min tanke är att försöka skapa ett projekt som är väl lämpat för kursen. Jag vill att det skall fånga upp
 mycket av det som vi har gått igenom. Jag tror att detta kommer att ge mig möjlighet att få repetera, lära mig och
 bemästra kursens innehåll. Jag tänker även att jag skall lägga till några funktioner som vi inte gått igenom.
+
 Jag kommer att försöka göra min egna version av ett Breakout spel med lite egna grafiker och funktioner.
 Mitt mål med spelet är att försöka göra det så välkodat och strukturerat som jag kan.
 
 Avgränsningar: Det är svårt att veta nu vad jag kommer göra och inte. Det beror på hur lång tid allting tar. Men
-nu i förhand tror jag inte att jag kommer att skapa en AI som ska spela spelet. Möjligtvis några if-satser där paddeln
-helt enkelt följer bollens x-värde. Men inget mer komplicerat än så. Sen har jag inte några mer saker som jag inte vill
-göra. Som sagt så beror allt på vad tiden räcker till.
+nu i förhand tror jag inte att jag kommer att skapa en AI som ska spela spelet. Möjligtvis en metod med några if-satser där paddeln
+helt enkelt följer bollens x-värde. Men inget mer komplicerat än så. Som sagt så beror allt på vad tiden räcker till.
+

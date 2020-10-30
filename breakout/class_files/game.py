@@ -45,7 +45,7 @@ class Game:
 
         self.p_text = pause_font.render(f"P TO PAUSE", True, BLACK, None)
         self.p_textrect = self.lvl_text.get_rect()
-        self.p_textrect.center = (750, 590)
+        self.p_textrect.center = (730, 590)
 
     def show_stats(self):
         self.get_stats()
@@ -330,6 +330,7 @@ class Game:
     def change_level(self):
         self.start_score = self.score
         self.level += 1
+        self.ball.speed += 2
         self.fade("ingame")
         if self.loaded:
             self.boxes = self.box_gen()
@@ -357,7 +358,7 @@ class Game:
         self.fade("ingame")
         self.paused = False
         self.first_run = True
-        self.boxes = []
+        self.boxes = self.box_gen()
         self.play()
 
     def draw(self):

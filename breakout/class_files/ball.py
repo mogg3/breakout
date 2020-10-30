@@ -5,16 +5,17 @@ from math import *
 class Ball:
 
     def __init__(self, x, y):
-        self.speed = 12
+        self.speed = 5
         self.x = x
         self.y = y
         self.x_step = cos(pi / 2) * self.speed
         self.y_step = -sin(pi / 2) * self.speed
+        self.step = sqrt(self.x_step ** 2 + self.y_step ** 2)
         self.x_index = 0
         self.ball_img = pygame.image.load(r'C:\Users\marcu\PycharmProjects\Breakout\breakout\images\ball.png')
 
     def __str__(self):
-        return "X = " + str(self.x) + "     Y = " + str(self.y) + "     X-Step = " + str(self.x_step) + "       Y-Step =" + str(self.y_step)
+        return f"X = {self.x}      Y = {self.y}      X_Step = {self.x_step}     Y-Step = {self.y_step}        Step = {self.step}"
 
     @property
     def top(self):
